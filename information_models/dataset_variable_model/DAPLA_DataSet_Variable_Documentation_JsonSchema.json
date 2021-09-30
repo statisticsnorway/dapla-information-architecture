@@ -94,6 +94,7 @@
             "required": [
                 "codeList"
             ]
+            
         },
 
         "valueDomainTypeDescribed": {
@@ -111,6 +112,7 @@
             "required": [
                 "description"
             ]
+            
         },
 
         "valueDomainTypeReference": {
@@ -195,7 +197,7 @@
                     "description": {"$ref": "#/definitions/multilingualStringType", "description": "Beskrivelse av variabelen (støtte for flere språk)"},
                     "uriDefinition": {
                         "type": "array",
-                        "items": {"type": ["string", "null"] },
+                        "items": {"type": "string"},
                         "description": "En lenke/URL til definisjon av variabelen, f.eks. i SSBs VarDok eller i Datakatalogen hos Digdir"
                     },
                     "dataType": {"type": "string",
