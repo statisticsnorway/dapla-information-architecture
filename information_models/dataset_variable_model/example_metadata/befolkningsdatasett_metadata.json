@@ -1,0 +1,76 @@
+{
+    "shortName": "BEFOLKNINGSDATA",
+    "name": [
+        {
+            "languageCode": "no",
+            "value": "Befolkningsdatabasen"
+        }
+    ],
+    "temporalityType": "STATUS",
+    "unitType": "PERSON",
+    "variables": [
+        {
+            "variableRole": "IDENTIFIER",
+            "shortName": "FNR",
+            "name": [
+                {
+                    "languageCode": "no",
+                    "value": "Fødselsnummer"
+                }
+            ],
+            "dataType": "STRING",
+            "uriDefinition": [
+                "https://www.ssb.no/a/metadata/conceptvariable/vardok/26/nb"
+            ]
+        },
+        {
+            "variableRole": "MEASURE",
+            "shortName": "SIVILSTAND",
+            "name": [
+                {
+                    "languageCode": "no",
+                    "value": "Sivilstand"
+                }
+            ],
+            "dataType": "STRING",
+            "valueDomain": {
+                "uriDefinition": "https://www.ssb.no/klass/klassifikasjoner/19"
+            },
+            "uriDefinition": [
+                "https://www.ssb.no/a/metadata/conceptvariable/vardok/91/nb"
+            ]
+        },
+        {
+            "variableRole": "MEASURE",
+            "shortName": "KJONN",
+            "name": [
+                {
+                    "languageCode": "no",
+                    "value": "Kjønn"
+                }
+            ],
+            "dataType": "STRING",
+            "valueDomain": {
+                "uriDefinition": "https://www.ssb.no/klass/klassifikasjoner/2"
+            },
+            "uriDefinition": []
+        },
+        {
+            "variableRole": "START_TIME",
+            "shortName": "DATO",
+            "name": [
+                {
+                    "languageCode": "no",
+                    "value": "Dato for personopplysningene"
+                }
+            ],
+            "dataType": "DATE"
+        }
+    ],
+    "description": [
+        {
+            "languageCode": "no",
+            "value": "Personopplysninger målt årlig pr. 01.01."
+        }
+    ]
+}
