@@ -78,19 +78,12 @@
             "description": "Kodeliste for spesialverdier (SENTINEL) og/eller manglende verdier (MISSING)"
         },
 
-        "valueDomainType": {
+        "valueDomainTypeEnumerated": {
             "type": "object",
             "properties": {
-                "shortName": {"type": "string"},
                 "name": {"$ref": "#/definitions/multilingualStringType"},
                 "description": {"$ref": "#/definitions/multilingualStringType"},
-                "uriDefinition": {
-                    "type": "array",
-                    "items": [
-                        {"type": [ "string", "null" ]}
-                    ]
-                },
-                "codeList": {"$ref": "#/definitions/codeListType"},
+                "codeList": {"$ref": "#/definitions/codeListType", "description": "Kodeliste for variabelen"},
                 "sentinelAndMissingValues": {"$ref": "#/definitions/sentinelAndMissingValuesType"},
                 "measurementType": {"type": "string",
                     "enum": ["CURRENCY", "WEIGHT", "LENGTH", "HEIGHT", "GEOGRAPHICAL"],
@@ -99,10 +92,39 @@
                 "measurementUnitDescription": {"$ref": "#/definitions/multilingualStringType", "description": "Måleenhet, f.eks. NOK for valuta, KG for vekt."}
             },
             "required": [
-                "shortName",
-                "name"
+                "codeList"
             ]
         },
+
+        "valueDomainTypeDescribed": {
+            "type": "object",
+            "properties": {
+                "name": {"$ref": "#/definitions/multilingualStringType"},
+                "description": {"$ref": "#/definitions/multilingualStringType", "description": "Beskrivelse av verdiområdet for variabelen, f.eks. 'alle positive tall'"},
+                "sentinelAndMissingValues": {"$ref": "#/definitions/sentinelAndMissingValuesType"},
+                "measurementType": {"type": "string",
+                    "enum": ["CURRENCY", "WEIGHT", "LENGTH", "HEIGHT", "GEOGRAPHICAL"],
+                    "description": "Måleenhetstype, f.eks. valuta, vekt og lengde"
+                },
+                "measurementUnitDescription": {"$ref": "#/definitions/multilingualStringType", "description": "Måleenhet, f.eks. NOK for valuta, KG for vekt."}
+            },
+            "required": [
+                "description"
+            ]
+        },
+
+        "valueDomainTypeReference": {
+            "type": "object",
+            "properties": {
+                "name": {"$ref": "#/definitions/multilingualStringType"},
+                "uriDefinition": {"type": "string", "description": "F.eks. lenke/URI til kodeliste/klassifikasjon i KLASS"}
+            },
+            "required": [
+                    "uriDefinition"
+                ]
+        },
+
+
 
         "unitTypeType": {"type": "string",
             "enum": ["PERSON", "VIRKSOMHET", "FORETAK", "HUSHOLDNING", "KJØRETØY", "BOLIG"]
@@ -171,17 +193,26 @@
                     "shortName": {"$ref": "#/definitions/shortNameType"},
                     "name": {"$ref": "#/definitions/multilingualStringType", "description": "Variabelnavn/tittel (støtte for flere språk)."},
                     "description": {"$ref": "#/definitions/multilingualStringType", "description": "Beskrivelse av variabelen (støtte for flere språk)"},
-                    "dataType": {"type": "string",
-                        "enum": ["STRING", "LONG", "DOUBLE", "DATE"],
-                        "description": "Datatype"
-                    },
-                    "valueDomain": {"$ref": "#/definitions/valueDomainType", "description": "Gyldige verdiområde (verdier) for variabelen"},
-                    "populationDescription": {"$ref": "#/definitions/multilingualStringType", "description": "Populasjon, f.eks. 'Alle kvinner over 18 år'"},
-                    "subjectFields": {"$ref": "#/definitions/subjectFieldType", "description": "Emneområd(er) for variabelen"},
                     "uriDefinition": {
                         "type": "array",
-                        "items": {"type": ["string", "null"] }
+                        "items": {"type": ["string", "null"] },
+                        "description": "En lenke/URL til definisjon av variabelen, f.eks. i SSBs VarDok eller i Datakatalogen hos Digdir"
                     },
+                    "dataType": {"type": "string",
+                        "enum": ["STRING", "LONG", "DOUBLE", "DATE"],
+                        "description": "Datatype: tekst (STRING), heltall (LONG), desimaltall (DOUBLE) eller dato YYYY-MM-DD (DATE)"
+                    },
+                    "valueDomain": {
+                        "type": "object",
+                        "oneOf": [
+                            { "$ref": "#/definitions/valueDomainTypeReference" },
+                            { "$ref": "#/definitions/valueDomainTypeDescribed" },
+                            { "$ref": "#/definitions/valueDomainTypeEnumerated" }
+                        ],
+                        "description": "Et verdiområde for variabelen (mulige varianter:  (1) Referanse til KLASS,  (2) Beskrevet,  (3) Egen kodeliste)"
+                    },
+                    "populationDescription": {"$ref": "#/definitions/multilingualStringType", "description": "Populasjon, f.eks. 'Alle kvinner over 18 år'"},
+                    "subjectFields": {"$ref": "#/definitions/subjectFieldType", "description": "Emneområd(er) for variabelen"},
                     "format": {
                         "type": "string",
                         "description": "Eventuelt format for variabelen, f.eks. RegExp",
@@ -192,7 +223,6 @@
                     "variableRole",
                     "shortName",
                     "name",
-                    "description",
                     "dataType"
                 ]
             },
@@ -221,11 +251,8 @@
     "required": [
         "shortName",
         "name",
-        "description",
         "temporalityType",
         "unitType",
-        "variables",
-        "spatialCoverageDescription",
-        "dataRevision"
+        "variables"
     ]
 }
