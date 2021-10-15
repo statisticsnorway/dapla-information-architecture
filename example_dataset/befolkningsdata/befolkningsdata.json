@@ -25,23 +25,6 @@
         },
         {
             "variableRole": "MEASURE",
-            "shortName": "BOSTEDSKOMMUNE",
-            "name": [
-                {
-                    "languageCode": "no",
-                    "value": "Bostedskommune"
-                }
-            ],
-            "dataType": "STRING",
-            "valueDomain": {
-                "uriDefinition": "https://www.ssb.no/klass/klassifikasjoner/131"
-            },
-            "uriDefinition": [
-                "https://www.ssb.no/a/metadata/conceptvariable/vardok/94/nb"
-            ]
-        },
-        {
-            "variableRole": "MEASURE",
             "shortName": "SIVILSTAND",
             "name": [
                 {
@@ -59,15 +42,18 @@
         },
         {
             "variableRole": "MEASURE",
-            "shortName": "SKATTEPLIKTIG_FORMUE",
+            "shortName": "KJONN",
             "name": [
                 {
                     "languageCode": "no",
-                    "value": "Skattepliktig formue"
+                    "value": "Kjønn"
                 }
             ],
-            "dataType": "LONG",
-            "uriDefinition": ["https://www.ssb.no/a/metadata/conceptvariable/vardok/1441/nb"]
+            "dataType": "STRING",
+            "valueDomain": {
+                "uriDefinition": "https://www.ssb.no/klass/klassifikasjoner/2"
+            },
+            "uriDefinition": []
         },
         {
             "variableRole": "START_TIME",
