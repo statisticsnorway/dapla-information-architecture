@@ -1,0 +1,413 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+      "dateType": {
+        "$comment": "Type for the date format YYYY-MM-DD. (Python package jsonschema missing support for JSON Schema date format.)",
+        "type": "string",
+        "pattern": "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$",
+        "description": "Dato YYYY-MM-DD"
+      },
+      "shortNameType": {
+        "type": "string",
+        "pattern": "^[a-zA-Z0-9_-]+$",
+        "description": "Kortnavn (teknisk kortnavn). Gyldige tegn for kortnavn: a-z, A-Z, 0-9, - (bidestrek) og _ (understrek)."
+      },
+      "multilingualStringType": {
+        "$comment": "Type for language support.",
+        "type": "array",
+        "format": "table",
+        "uniqueItems": true,
+        "items": {
+          "type": "object",
+          "title": "Legg til ..",
+          "properties": {
+            "languageCode": {
+              "type": "string",
+              "enum": [
+                "no",
+                "nb",
+                "nn",
+                "en"
+              ],
+              "title": "Kode"
+            },
+            "value": {
+              "type": "string",
+              "title": "Tekst"
+            }
+          },
+          "required": [
+            "languageCode",
+            "value"
+          ]
+        }
+      },
+      "codeListType": {
+        "type": "object",
+        "properties": {
+          "codeItems": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "Kode-verdi"
+                },
+                "categoryTitle": {
+                  "$ref": "#/definitions/multilingualStringType",
+                  "description": "Kode-tekst"
+                },
+                "validFrom": {
+                  "$ref": "#/definitions/dateType",
+                  "description": "Kode gyldig fra dato"
+                },
+                "validUntil": {
+                  "$ref": "#/definitions/dateType",
+                  "description": "Kode gyldig til dato (blank hvis koden fortsatt er gyldig)"
+                }
+              },
+              "required": [
+                "code",
+                "categoryTitle",
+                "validFrom"
+              ]
+            }
+          }
+        },
+        "required": [
+          "codeItems"
+        ]
+      },
+      "sentinelAndMissingValuesType": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Kode for manglende verdi"
+            },
+            "categoryTitle": {
+              "$ref": "#/definitions/multilingualStringType"
+            },
+            "codeType": {
+              "type": "string",
+              "enum": [
+                "MISSING",
+                "SENTINEL"
+              ]
+            }
+          },
+          "required": [
+            "code",
+            "categoryTitle"
+          ]
+        },
+        "description": "Kodeliste for spesialverdier (SENTINEL) og/eller manglende verdier (MISSING)"
+      },
+      "valueDomainTypeEnumerated": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/definitions/multilingualStringType"
+          },
+          "description": {
+            "$ref": "#/definitions/multilingualStringType"
+          },
+          "codeList": {
+            "$ref": "#/definitions/codeListType",
+            "description": "Kodeliste for variabelen"
+          },
+          "sentinelAndMissingValues": {
+            "$ref": "#/definitions/sentinelAndMissingValuesType"
+          },
+          "measurementType": {
+            "type": "string",
+            "enum": [
+              "CURRENCY",
+              "WEIGHT",
+              "LENGTH",
+              "HEIGHT",
+              "GEOGRAPHICAL"
+            ],
+            "description": "Måleenhetstype"
+          },
+          "measurementUnitDescription": {
+            "$ref": "#/definitions/multilingualStringType",
+            "description": "Måleenhet, f.eks. NOK for valuta, KG for vekt."
+          }
+        },
+        "required": [
+          "codeList"
+        ]
+      },
+      "valueDomainTypeDescribed": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/definitions/multilingualStringType"
+          },
+          "description": {
+            "$ref": "#/definitions/multilingualStringType",
+            "description": "Beskrivelse av verdiområdet for variabelen, f.eks. 'alle positive tall'"
+          },
+          "sentinelAndMissingValues": {
+            "$ref": "#/definitions/sentinelAndMissingValuesType"
+          },
+          "measurementType": {
+            "type": "string",
+            "enum": [
+              "CURRENCY",
+              "WEIGHT",
+              "LENGTH",
+              "HEIGHT",
+              "GEOGRAPHICAL"
+            ],
+            "description": "Måleenhetstype, f.eks. valuta, vekt og lengde"
+          },
+          "measurementUnitDescription": {
+            "$ref": "#/definitions/multilingualStringType",
+            "description": "Måleenhet, f.eks. NOK for valuta, KG for vekt."
+          }
+        },
+        "required": [
+          "description"
+        ]
+      },
+      "valueDomainTypeReference": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/definitions/multilingualStringType"
+          },
+          "uriDefinition": {
+            "type": "string",
+            "description": "F.eks. lenke/URI til kodeliste/klassifikasjon i KLASS"
+          }
+        },
+        "required": [
+          "uriDefinition"
+        ]
+      },
+      "unitTypeType": {
+        "type": "string",
+        "enum": [
+          "PERSON",
+          "VIRKSOMHET",
+          "FORETAK",
+          "HUSHOLDNING",
+          "KJØRETØY",
+          "BOLIG"
+        ]
+      },
+      "subjectFieldType": {
+        "type": "array",
+        "items": [
+          {
+            "type": "object",
+            "properties": {
+              "shortName": {
+                "type": "string"
+              },
+              "name": {
+                "$ref": "#/definitions/multilingualStringType"
+              },
+              "description": {
+                "$ref": "#/definitions/multilingualStringType"
+              }
+            },
+            "required": [
+              "shortName",
+              "name",
+              "description"
+            ]
+          }
+        ]
+      }
+    },
+    "type": "object",
+    "title": "SSB datasett og variabel-dokumentasjon",
+    "properties": {
+      "shortName": {
+        "$ref": "#/definitions/shortNameType",
+        "description": "Datasett kortnavn (teknisk kortnavn). Gyldige tegn for kortnavn: a-z, A-Z, 0-9, - (bidestrek) og _ (understrek)."
+      },
+      "name": {
+        "$ref": "#/definitions/multilingualStringType",
+        "title": "Datasettnavn/tittel (støtte for flere språk)."
+      },
+      "description": {
+        "$ref": "#/definitions/multilingualStringType",
+        "description": "Beskrivelse av datasettet (støtte for flere språk)",
+        "options": {
+          "collapsed": true
+        }
+      },
+      "temporalityType": {
+        "type": "string",
+        "enum": [
+          "FIXED",
+          "STATUS",
+          "ACCUMULATED",
+          "EVENT"
+        ],
+        "description": "Temporalitetstype for datasettet: konstanter (FIXED), tverrsnitt (STATUS), akkumulerte verdier (ACCUMULATED) eller hendelser (EVENT)"
+      },
+      "unitType": {
+        "$ref": "#/definitions/unitTypeType",
+        "description": "Enhetstype for datasettet"
+      },
+      "spatialCoverageDescription": {
+        "$ref": "#/definitions/multilingualStringType",
+        "description": "Datasettets dekningsområde, f.eks. Verden, Europa, Norge, Viken eller Oslo"
+      },
+      "dataRevision": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "$ref": "#/definitions/multilingualStringType"
+          },
+          "temporalEndOfSeries": {
+            "type": "boolean",
+            "default": false,
+            "description": "Er dataserien/datasettet avsluttet? (settes kun til 'true' hvis datasettet ikke oppdateres framover)?"
+          },
+          "temporalCoverageStart": {
+            "$ref": "#/definitions/dateType",
+            "description": "Datasettet inneholder data fra og med dato"
+          },
+          "temporalCoverageLatest": {
+            "$ref": "#/definitions/dateType",
+            "description": "Datasettet inneholder data til og med dato"
+          },
+          "temporalStatusDates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/dateType"
+            },
+            "description": "Eventuelt en liste med tverrsnittsdatoer/måledatoer for datasett med temopralitetstype STATUS eller ACCUMULERT"
+          }
+        },
+        "description": "Beskrivelse av siste datarevisjon - og dataperioder som inngår i datasettet.",
+        "required": [
+          "description",
+          "temporalEndOfSeries"
+        ]
+      },
+      "variables": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "format": "categories",
+          "basicCategoryTitle": "Variabeloversikt",
+          "properties": {
+            "variableRole": {
+              "type": "string",
+              "enum": [
+                "IDENTIFIER",
+                "MEASURE",
+                "START_TIME",
+                "STOP_TIME",
+                "ATTRIBUTE"
+              ],
+              "description": "Variabelens rolle i datasettet. Identifikator (IDENTIFIER), målt verdi (MEASURE), måletidspunkt (START_TIME) eller gyldighetstidsrom (START_TIME og STOP_TIME)"
+            },
+            "shortName": {
+              "$ref": "#/definitions/shortNameType"
+            },
+            "name": {
+              "$ref": "#/definitions/multilingualStringType",
+              "description": "Variabelnavn/tittel (støtte for flere språk)."
+            },
+            "description": {
+              "$ref": "#/definitions/multilingualStringType",
+              "description": "Beskrivelse av variabelen (støtte for flere språk)"
+            },
+            "uriDefinition": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "En lenke/URL til definisjon av variabelen, f.eks. i SSBs VarDok eller i Datakatalogen hos Digdir"
+            },
+            "dataType": {
+              "type": "string",
+              "enum": [
+                "STRING",
+                "LONG",
+                "DOUBLE",
+                "DATE"
+              ],
+              "description": "Datatype: tekst (STRING), heltall (LONG), desimaltall (DOUBLE) eller dato YYYY-MM-DD (DATE)"
+            },
+            "valueDomain": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/valueDomainTypeReference"
+                },
+                {
+                  "$ref": "#/definitions/valueDomainTypeDescribed"
+                },
+                {
+                  "$ref": "#/definitions/valueDomainTypeEnumerated"
+                }
+              ],
+              "description": "Et verdiområde for variabelen (mulige varianter:  (1) Referanse til KLASS,  (2) Beskrevet,  (3) Egen kodeliste)"
+            },
+            "populationDescription": {
+              "$ref": "#/definitions/multilingualStringType",
+              "description": "Populasjon, f.eks. 'Alle kvinner over 18 år'"
+            },
+            "subjectFields": {
+              "$ref": "#/definitions/subjectFieldType",
+              "description": "Emneområd(er) for variabelen"
+            },
+            "format": {
+              "type": "string",
+              "description": "Eventuelt format for variabelen, f.eks. RegExp",
+              "$comment": "E.g. a regular expression or a specific type like RandomUInt48."
+            }
+          },
+          "required": [
+            "variableRole",
+            "shortName",
+            "name",
+            "dataType"
+          ]
+        },
+        "ssbProperty": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "key",
+              "value"
+            ]
+          }
+        },
+        "description": "En liste med variabler som inngår i datasettet."
+      },
+      "dataEncoding": {
+        "type": "string",
+        "default": "UTF-8",
+        "description": "Tegnsett. Standard er UTF-8, men kan i spesielle tilfeller settes til noe annet, f.eks. ASCII, ISO-8859-1, UTF-16 eller Windows-1252."
+      }
+    },
+    "required": [
+      "shortName",
+      "name",
+      "temporalityType",
+      "unitType",
+      "variables"
+    ]
+  }

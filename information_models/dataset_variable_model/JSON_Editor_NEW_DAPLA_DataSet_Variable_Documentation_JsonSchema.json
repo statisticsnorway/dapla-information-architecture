@@ -1,0 +1,275 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+      "dateType": {
+        "$comment": "Type for the date format YYYY-MM-DD. (Python package jsonschema missing support for JSON Schema date format.)",
+        "type": "string",
+        "pattern": "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$",
+        "description": "Dato YYYY-MM-DD"
+      },
+      "shortNameType": {
+        "type": "string",
+        "pattern": "^[a-zA-Z0-9_-]+$",
+        "description": "Kortnavn (teknisk kortnavn). Gyldige tegn for kortnavn: a-z, A-Z, 0-9, - (bidestrek) og _ (understrek)."
+      },
+      "multilingualStringType": {
+        "type": "array",
+        "format": "table",
+        "description": "Flerspråklighet",
+        "items": {
+          "type": "object",
+          "properties": {
+            "languageCode": {
+              "type": "string",
+              "enum": [
+                "no",
+                "nb",
+                "nn",
+                "en"
+              ],
+              "title": "Språkkode"
+            },
+            "value": {
+              "type": "string",
+              "title": "tekst"
+            }
+          },
+          "required": [
+            "languageCode",
+            "value"
+          ]
+        }
+      },
+      "valuationType": {
+        "type": "string",
+        "enum": [
+          "SENSITIVE",
+          "SHIELDED",
+          "INTERNAL",
+          "OPEN"
+        ],
+        "description": "verdivurdering (sensitivitetsklassifisering) for datasettet: sensitiv (SENSITIVE), beskyttet (SHIELDED), intern (INTERNAL) eller åpen (OPEN)"
+      },
+      "sentinelAndMissingValuesType": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Kode for manglende verdi"
+            },
+            "categoryTitle": {
+              "$ref": "#/definitions/multilingualStringType"
+            },
+            "codeType": {
+              "type": "string",
+              "enum": [
+                "MISSING",
+                "SENTINEL"
+              ]
+            }
+          },
+          "required": [
+            "code",
+            "categoryTitle"
+          ]
+        },
+        "description": "Kodeliste for spesialverdier (SENTINEL) og/eller manglende verdier (MISSING)"
+      },
+      "unitTypeType": {
+        "type": "string",
+        "enum": [
+          "PERSON",
+          "VIRKSOMHET",
+          "FORETAK",
+          "HUSHOLDNING",
+          "KJØRETØY",
+          "BOLIG"
+        ]
+      }
+    },
+    "type": "object",
+    "title": "Dokumentasjon av datasett og variabler",
+    "properties": {
+      "shortName": {
+        "$ref": "#/definitions/shortNameType",
+        "title": "Datasett kortnavn",
+        "description": "Datasett kortnavn (teknisk kortnavn). Gyldige tegn for kortnavn: a-z, A-Z, 0-9, - (bidestrek) og _ (understrek)"
+      },
+      "name": {
+        "$ref": "#/definitions/multilingualStringType",
+        "title": "Datasett navn/tittel",
+        "description": "Datasettnavn/tittel"
+      },
+      "description": {
+        "$ref": "#/definitions/multilingualStringType",
+        "title": "Datasett beskrivelse",
+        "description": "Beskrivelse av datasettet"
+      },
+      "temporalityType": {
+        "type": "string",
+        "enum": [
+          "FIXED",
+          "STATUS",
+          "ACCUMULATED",
+          "EVENT"
+        ],
+        "title": "Datasett temporalitetstype",
+        "description": "Temporalitetstype for datasettet: konstanter (FIXED), tverrsnitt (STATUS), akkumulerte verdier (ACCUMULATED) eller hendelser (EVENT)"
+      },
+      "unitType": {
+        "$ref": "#/definitions/unitTypeType",
+        "title": "Datasett enhetstype",
+        "description": "Enhetstype for datasettet"
+      },
+      "datasetState": {
+        "type": "string",
+        "enum": [
+          "RAW_DATA",
+          "INPUT_DATA",
+          "PROCESSED_DATA",
+          "DATA_PRODUCT",
+          "OUTPUT_DATA",
+          "ARCHIVED_DATA",
+          "TEMP_DATA",
+          "OTHER_DATA"
+        ],
+        "title": "Datasett datatilstand",
+        "description": "Datatilstand for datasettet: kildedata (RAW_DATA), inndata (INPUT_DATA), klargjorte data (PROCESSED_DATA), statistik (DATA_PRODUCT), utdata (OUTPUT_DATA), arkivdata (ARCHIVED_DATA), temporære data (TEMP_DATA) og andre typer datasett (OTHER_DATA)"
+      },
+      "valuation": {
+        "$ref": "#/definitions/valuationType",
+        "title": "Datasett verdivurdering",
+        "description": "Verdivurdering for datasettet"
+      },
+      "spatialCoverageDescription": {
+        "$ref": "#/definitions/multilingualStringType",
+        "title": "Datasettets dekningsområde",
+        "description": "Datasettets dekningsområde, f.eks. Verden, Europa, Norge, Viken eller Halden"
+      },
+      "populationDescription": {
+        "$ref": "#/definitions/multilingualStringType",
+        "title": "Populasjonsbeskrivelse for datasettet",
+        "description": "Populasjon, f.eks. 'Alle kvinner over 18 år'"
+      },
+      "temporalEndOfSeries": {
+        "type": "boolean",
+        "title": "Er dataserien (datasettet) avsluttet?",
+        "default": false,
+        "description": "Er dataserien/datasettet avsluttet? (Settes kun til 'true' hvis datasettet ikke oppdateres framover.)"
+      },
+      "variables": {
+        "type": "array",
+        "title": "Variabler som inngår i datasettet",
+        "description": "En liste med variabler som inngår i datasettet.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "shortName": {
+              "$ref": "#/definitions/shortNameType",
+              "description": "Variabel kortnavn (teknisk kortnavn). Gyldige tegn for kortnavn: a-z, A-Z, 0-9, - (bidestrek) og _ (understrek)"
+            },
+            "name": {
+              "$ref": "#/definitions/multilingualStringType",
+              "description": "Variabelnavn/tittel"
+            },
+            "description": {
+              "$ref": "#/definitions/multilingualStringType",
+              "description": "Beskrivelse av variabelen"
+            },
+            "variableRole": {
+              "type": "string",
+              "enum": [
+                "IDENTIFIER",
+                "MEASURE",
+                "START_TIME",
+                "STOP_TIME",
+                "ATTRIBUTE"
+              ],
+              "description": "Variabelens rolle i datasettet. Identifikator (IDENTIFIER), målt verdi (MEASURE), måletidspunkt (START_TIME) eller gyldighetstidsrom (START_TIME og STOP_TIME)"
+            },
+            "dataType": {
+              "type": "string",
+              "enum": [
+                "STRING",
+                "LONG",
+                "DOUBLE",
+                "DATE"
+              ],
+              "description": "Datatype: tekst (STRING), heltall (LONG), desimaltall (DOUBLE) eller dato YYYY-MM-DD (DATE)"
+            },
+            "uriDefinition": {
+              "type": "string",
+              "description": "En lenke (URI) til definisjon for variabelen, f.eks. i SSBs VarDok eller i Datakatalogen hos Digdir"
+            },
+            "uriCodeValues": {
+              "type": "string",
+              "description": "En lenke (URI) til gyldige verdier for variabelen i SSBs KLASS. Se https://www.ssb.no/klass/"
+            },
+            "sentinelAndMissingValues": {
+              "$ref": "#/definitions/sentinelAndMissingValuesType",
+              "description": "Liste over eventuelle sentinel/missing verdier for variabelen."
+            },
+            "populationDescription": {
+              "$ref": "#/definitions/multilingualStringType",
+              "description": "Populasjon, f.eks. 'Alle kvinner over 18 år'"
+            },
+            "valuation": {
+              "$ref": "#/definitions/valuationType",
+              "description": "Verdivurdering (sensitivitetsklassifisering) for variabelen"
+            },
+            "temporalityType": {
+              "type": "string",
+              "enum": [
+                "FIXED",
+                "STATUS",
+                "ACCUMULATED",
+                "EVENT"
+              ],
+              "description": "Temporalitetstype for variabelen: konstanter (FIXED), tverrsnitt (STATUS), akkumulerte verdier (ACCUMULATED) eller hendelser (EVENT)"
+            },
+            "measurementType": {
+              "type": "string",
+              "enum": [
+                "CURRENCY",
+                "WEIGHT",
+                "LENGTH",
+                "HEIGHT",
+                "GEOGRAPHICAL"
+              ],
+              "description": "Måleenhetstype"
+            },
+            "measurementUnitDescription": {
+              "$ref": "#/definitions/multilingualStringType",
+              "description": "Måleenhet, f.eks. NOK for valuta, KG for vekt, KM for lengde"
+            },
+            "format": {
+              "type": "string",
+              "description": "Eventuelt format for variabel-verdiene, f.eks. regulært uttrykk ^[a-zA-Z0-9_-]"
+            }
+          },
+          "required": [
+            "variableRole",
+            "shortName",
+            "name",
+            "dataType"
+          ]
+        }
+      },
+      "dataEncoding": {
+        "type": "string",
+        "default": "UTF-8",
+        "description": "Tegnsett. Standard er UTF-8, men kan i spesielle tilfeller settes til noe annet, f.eks. ASCII, ISO-8859-1, UTF-16 eller Windows-1252."
+      }
+    },
+    "required": [
+      "shortName",
+      "name",
+      "temporalityType",
+      "unitType",
+      "datasetState",
+      "valuation",
+      "variables"
+    ]
+  }
