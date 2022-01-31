@@ -1,0 +1,68 @@
+{
+    "shortName": "varedata",
+    "dataSetState": "PROCESSED_DATA",
+    "name": "Vareeksportdata",
+    "temporalityType": "EVENT",
+    "description": "Eksempeldatasett for vareeksport",
+    "populationDescription": "Alle foretak i Norge som eksporterer varer i løpet av kalenderåret.",
+    "spatialCoverageDescription": "Verden",
+    "datasetSourcePath": "no.ssb.dapla/dataset/produkt/vareeksport/arkiv/varedata.csv",
+    "unitType": "VIRKSOMHET",
+    "createdDate": "2018-05-18T15:10:00",
+    "createdBy": "Nils Nilsen",
+    "dataOwner": "Seksjon for utenrikshandelsstatistikk (214)",
+    "lastUpdatedDate": "2022-01-31T14:20:00",
+    "lastUpdatedBy": "Kari Olsen",
+    "languageCode": "nb",
+    "version": "1.0",
+    "variables": [
+        {
+            "shortName": "orgnr",
+            "dataType": "STRING",
+            "variableRole": "IDENTIFIER",
+            "definitionUri": "no.ssb.dapla/variabledefinition/11223344"
+        },
+        {
+            "shortName": "inst_sektor",
+            "dataType": "STRING",
+            "variableRole": "MEASURE",
+            "definitionUri": "no.ssb.dapla/variabledefinition/22333444"
+        },
+        {
+            "shortName": "varenr_hs",
+            "dataType": "STRING",
+            "variableRole": "MEASURE",
+            "description": "Varenummer iht. HS nomenklaturen fra Tolletaten (toll.no)."
+        },
+        {
+            "shortName": "eksport_vekt_tonn",
+            "dataType": "LONG",
+            "variableRole": "MEASURE",
+            "definitionUri": "no.ssb.dapla/variabledefinition/333444555",
+            "measurementUnit": "TONN"
+        },
+        {
+            "shortName": "eksport_vekt_beloep",
+            "dataType": "LONG",
+            "variableRole": "MEASURE",
+            "definitionUri": "no.ssb.dapla/variabledefinition/44455566",
+            "measurementUnit": "NOK",
+            "description": "Alle eksportbeløp omregnet til norske kroner med valutakurser fra Norges Bank."
+        },
+        {
+            "shortName": "eksport_vekt_tonn",
+            "dataType": "DATE",
+            "variableRole": "START_TIME",
+            "format": "YYYY-MM-DD"
+        }
+    ],
+    "TODO 1": "OK - Språkstøtte (languageCode)?",
+    "TODO 2": "Verdivurdering (valuation)?",
+    "TODO 3": "OK - Versjonering Major.Minor.Patch?",
+    "TODO 4": "Eventuelt også changeComment i tillegg til versjonering?",
+    "TODO 5": "Usikker på om vi skal benytte både ID og shortName?",
+    "TODO 6": "Maskingenerert - id, dataSourcePath, createdBy, createdDate, dataOwner, lastUpdatedDate, lastUpdatedBy",
+    "TODO 7": "Maskingenerert data-dato-fra og data-dato-til (hvilke perioder med data inneholder datasettet)",
+    "TODO 8": "OK - Bør population være på støttet både datasettnivå og på variabelnivå?",
+    "TODO 9": "variable.populationType - litt usikker på denne også?"
+}
