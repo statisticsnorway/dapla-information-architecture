@@ -14,7 +14,7 @@
     "lastUpdatedDate": "2022-01-31T14:20:00",
     "lastUpdatedBy": "Kari Olsen",
     "languageCode": "nb",
-    "version": "1.0",
+    "version": "2.0",
     "variables": [
         {
             "shortName": "orgnr",
@@ -26,10 +26,17 @@
             "shortName": "inst_sektor",
             "dataType": "STRING",
             "variableRole": "MEASURE",
-            "definitionUri": "no.ssb.dapla/variabledefinition/22333444"
+            "definitionUri": "no.ssb.dapla/variabledefinition/22333444",
+            "missingAndSentinelValues": [
+                {
+                    "code": "0000",
+                    "name": "Ukjent institusjonell sektor"
+                }
+            ]
         },
         {
             "shortName": "varenr_hs",
+            "name": "Varenummer",
             "dataType": "STRING",
             "variableRole": "MEASURE",
             "description": "Varenummer iht. HS nomenklaturen fra Tolletaten (toll.no)."
@@ -51,13 +58,14 @@
         },
         {
             "shortName": "eksport_vekt_tonn",
+            "name": "Eksportdato",
             "dataType": "DATE",
             "variableRole": "START_TIME",
             "format": "YYYY-MM-DD"
         }
     ],
     "TODO 1": "OK - Språkstøtte (languageCode)?",
-    "TODO 2": "Verdivurdering (valuation)?",
+    "TODO 2": "Usikker på om verdivurdering (valuation) skal med?",
     "TODO 3": "OK - Versjonering Major.Minor.Patch?",
     "TODO 4": "Eventuelt også changeComment i tillegg til versjonering?",
     "TODO 5": "Usikker på om vi skal benytte både ID og shortName?",
