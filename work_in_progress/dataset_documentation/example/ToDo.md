@@ -1,12 +1,17 @@
 # ToDo JSON metadata
-- 
+- Lage JSON eksempel-metadata for hver datatilstand
+- Oversette attributter til norsk???
+    - Lage en Python-translator for å automatisk å oversettte mellom egelsk-norsk-engelsk?
 
 # ToDo JSON Schema modell
-- Ta i bruk IF-THEN-ELSE-mulighet i JSON-Schema for XOR-logikk
+- Et JSON Schema (modell) per datatilstand
+- Ta i bruk if-then-else-condition i JSON-Schema for XOR-logikk
+- Legge inn "description" og "title/label" på norsk
 
-# ToDo Python validator
-- Et JSON Schema per datatilstand
-    - Python finner hvilket JSON Schema som skal brukes for å validere ut i fra "dataSetState"
+# ToDo Python validator class
+- Validere med bruk av https://pypi.org/project/jsonschema/
+    - Python finner hvilket JSON Schema som skal brukes for å validere ut i fra "dataSetState" i JSON-metadatafil
+- Metode for serialisering/deserialisering  (JSON to/from Dict)
 
 # ToDo GUI / CLI
 - JSON Schema viewer?
