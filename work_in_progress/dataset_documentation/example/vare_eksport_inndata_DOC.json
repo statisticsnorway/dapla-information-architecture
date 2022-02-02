@@ -1,0 +1,36 @@
+{
+    "id": "no.ssb.dapla/dataset/1000055",
+    "shortName": "varedata",
+    "dataSetState": "INPUT_DATA",
+    "name": "Vareeksportdata",
+    "datasetSourcePath": "no.ssb.dapla/dataset/produkt/vareeksport/inndata/varedata_toll.csv",
+    "createdDate": "2018-04-29T14:30:00",
+    "dataOwner": "Seksjon for utenrikshandelsstatistikk (214)",
+    "variables": [
+        {
+            "shortName": "orgnr",
+            "dataType": "STRING",
+            "variableRole": "IDENTIFIER"
+        },
+        {
+            "shortName": "varenr_hs",
+            "dataType": "STRING",
+            "variableRole": "MEASURE"
+        },
+        {
+            "shortName": "eksport_vekt_tonn",
+            "dataType": "LONG",
+            "variableRole": "MEASURE"
+        },
+        {
+            "shortName": "eksport_beloep_valuta",
+            "dataType": "LONG",
+            "variableRole": "MEASURE"
+        },
+        {
+            "shortName": "eksport_dato",
+            "dataType": "DATE",
+            "variableRole": "START_TIME"
+        }
+    ]
+}
