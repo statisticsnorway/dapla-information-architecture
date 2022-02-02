@@ -65,12 +65,12 @@
             "format": "YYYY-MM-DD"
         }
     ],
-    "COMMENT 1": "Flerspråklighet (languageCode) er ikke vist i eksempelt",
+    "COMMENT 1": "Flerspråklighet (languageCode) er ikke vist i eksempelet.",
     "COMMENT 2": "Verdivurdering (valuation)? Christian T. påpekte at det er usikkert om dette er relevant her.",
     "COMMENT 3": "Frivillig attributt som viser et eksempel på versjonering Major.Minor(.Patch) er lagt inn.",
-    "COOMENT 4": "Eventuelt om vi også bør ha en frivillig attributt 'changeComment' i tillegg til 'version'?",
+    "COOMENT 4": "Eventuelt om vi også bør ha en frivillig attributt 'changeComment' (versionRationale) i tillegg til 'version'?",
     "COMMENT 5": "Vi må avklare om datasett skal ha en unik 'id' i tillegg til 'datasetSourcePath' + 'shortName'. I DAPLA 1.0 var en del diskusjoner/uenighet om dette.",
     "COOMENT 6": "Det må implementeres maskingenerering av - id, shortName, dataSourcePath, createdBy, createdDate, dataOwner, lastUpdatedDate, lastUpdatedBy",
     "COMMENT 7": ".. kanskje også maskingenerert 'dataPeriodFrom' og 'dataPeriodUntil' (hvilke perioder med data inneholder datasettet)",
-    "COMMENT 8": "Bør vi støtte 'populationDescription' både på datasettnivå og på variabelnivå (enten eller (XOR))?"
+    "COMMENT 8": "Bør vi støtte 'populationDescription' både på datasettnivå og på variabelforekomst-nivå (enten eller (XOR))?"
 }
