@@ -8,6 +8,7 @@
   - [ ] Kildedata
   - [x] Inndata
   - [x] Klargjorte data
+  - [ ] Statistikk(data)?
 - Oversette attributter til norsk???
   - Lage en "Python-translator" for automatisk å oversettte mellom egelsk-norsk-engelsk attributtnavn og enum-lister?
 
@@ -16,7 +17,7 @@
 - Et [JSON Schema (modell)](https://json-schema.org/) per datatilstand
 - Ta i bruk if-then-else-condition i JSON-Schema for XOR-logikk
 - Legge inn "description" og "title/label" på norsk
-- Støtte dokukumentasjon av hierarkiske kildedata og inndata for mer komplekse datamottak?
+- Støtte dokumentasjon av hierarkiske kildedata og inndata for mer komplekse datamottak?
 
 ### ToDo datafil (CSV, Parquet, ...)
 
@@ -32,6 +33,7 @@
 
 - Validere metadata med bruk av [Python jsonschema](https://pypi.org/project/jsonschema/)
   - Python finner hvilket JSON Schema som skal brukes for å validere ut i fra "dataSetState" i JSON-metadatafil
+- Enventult også støtte mer avansert validering av data-filen (Parquet, CSV, ...) med oppslag i KLASS osv.?
 - Python metoder for serialisering/deserialisering av metadata (JSON to/from Dict)
 
 ---
@@ -41,7 +43,7 @@
 - Lage JSON Schema for VarDef-modell
 - Variabeldefinisjonseksempler i form av JSON-dokumenter
 - Python validator for variabeldefinisjoner
-- Enkel VarDef-prototyp med bruk av [Python HTTP server](https://docs.python.org/3/library/http.server.html)
+- Enkel VarDef-prototyp med bruk av [Python HTTP server](https://docs.python.org/3/library/http.server.html)?
 
 ---
 
