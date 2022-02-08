@@ -26,7 +26,7 @@
   - [x] Inndata
   - [x] Klargjorte data
   - [ ] Statistikk(data)?
-- Oversette attributter til norsk???
+- Oversette attributter til norsk??
   - Lage en "Python-translator" for automatisk å oversettte mellom egelsk-norsk-engelsk attributtnavn og enum-lister?
 
 ### Hente "basis metadata" fra datafil eksisterende datafil (CSV, Parquet, ...)
