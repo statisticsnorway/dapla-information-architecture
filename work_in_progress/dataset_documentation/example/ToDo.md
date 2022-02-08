@@ -9,14 +9,15 @@
 
 ---
 
-## **Prototype for datasettdokumentasjonssystem (DataDoc)**
+## **Prototyp for datasettdokumentasjonssystem (DataDoc)**
 
 ### Oversette DataDoc-infrormasjonsmodell til JSON Schema
 
-- **Ett [JSON Schema (modell)](https://json-schema.org/) per datatilstand**
-  - Ta i bruk if-then-else-condition i JSON-Schema for XOR-logikk
+- Utarbeide et [JSON Schema (modell)](https://json-schema.org/) **per datatilstand**
+  - Det er forskjellige krav til metadata for hver datatilstand. Vi må enten ta i bruk et JSON Schema per datatilstand, alternativt ta i bruk nye if-then-else-condition muligheter i JSON Schema
+  - Støtte enten-eller-logikk (XOR) i schema 
   - Legge inn "description" og "title/label" på norsk
-- Støtte dokumentasjon av hierarkiske kildedata og inndata for mer komplekse datamottak?
+- *Utvikle modell for dokumentasjon av hierarkiske kildedata og inndata for mer komplekse datamottak?*
 
 ### JSON metadata eksempler til bruk i testing, demo og opplæring i SSB
 
