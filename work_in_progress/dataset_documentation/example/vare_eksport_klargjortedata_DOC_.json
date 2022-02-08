@@ -1,0 +1,76 @@
+{
+    "id": "no.ssb.dapla/dataset/1000099",
+    "shortName": "varedata",
+    "dataSetState": "PROCESSED_DATA",
+    "name": "Vareeksportdata",
+    "temporalityType": "EVENT",
+    "description": "Eksempeldatasett for vareeksport",
+    "populationDescription": "Alle foretak i Norge som eksporterer varer i løpet av kalenderåret.",
+    "spatialCoverageDescription": "Verden",
+    "datasetSourcePath": "no.ssb.dapla/dataset/produkt/vareeksport/arkiv/varedata.csv",
+    "unitType": "VIRKSOMHET",
+    "createdDate": "2018-05-18T15:10:00",
+    "createdBy": "Nils Nilsen",
+    "dataOwner": "Seksjon for utenrikshandelsstatistikk (214)",
+    "lastUpdatedDate": "2022-01-31T14:20:00",
+    "lastUpdatedBy": "Kari Olsen",
+    "languageCode": "nb",
+    "version": "2.0",
+    "variables": [
+        {
+            "shortName": "orgnr",
+            "dataType": "STRING",
+            "variableRole": "IDENTIFIER",
+            "definitionUri": "no.ssb.dapla/variabledefinition/11223344"
+        },
+        {
+            "shortName": "inst_sektor",
+            "dataType": "STRING",
+            "variableRole": "MEASURE",
+            "definitionUri": "no.ssb.dapla/variabledefinition/22333444",
+            "missingAndSentinelValues": [
+                {
+                    "code": "0000",
+                    "name": "Ukjent institusjonell sektor"
+                }
+            ]
+        },
+        {
+            "shortName": "varenr_hs",
+            "name": "Varenummer",
+            "dataType": "STRING",
+            "variableRole": "MEASURE",
+            "description": "Varenummer iht. HS nomenklaturen fra Tolletaten (toll.no)."
+        },
+        {
+            "shortName": "eksport_vekt_tonn",
+            "dataType": "LONG",
+            "variableRole": "MEASURE",
+            "definitionUri": "no.ssb.dapla/variabledefinition/333444555",
+            "measurementUnit": "TONN"
+        },
+        {
+            "shortName": "eksport_beloep",
+            "dataType": "LONG",
+            "variableRole": "MEASURE",
+            "definitionUri": "no.ssb.dapla/variabledefinition/44455566",
+            "measurementUnit": "NOK",
+            "description": "Alle eksportbeløp omregnet til norske kroner med valutakurser fra Norges Bank."
+        },
+        {
+            "shortName": "eksport_dato",
+            "name": "Eksportdato",
+            "dataType": "DATE",
+            "variableRole": "START_TIME",
+            "format": "YYYY-MM-DD"
+        }
+    ],
+    "COMMENT 1": "Flerspråklighet (languageCode) er ikke vist i eksempelet.",
+    "COMMENT 2": "Verdivurdering (valuation)? Christian T. påpekte at det er usikkert om dette er relevant her.",
+    "COMMENT 3": "Frivillig attributt som viser et eksempel på versjonering Major.Minor(.Patch) er lagt inn.",
+    "COOMENT 4": "Eventuelt om vi også bør ha en frivillig attributt 'changeComment' (versionRationale) i tillegg til 'version'?",
+    "COMMENT 5": "Vi må avklare om datasett skal ha en unik 'id' i tillegg til 'datasetSourcePath' + 'shortName'. I DAPLA 1.0 var en del diskusjoner/uenighet om dette.",
+    "COOMENT 6": "Det må implementeres maskingenerering av - id, shortName, dataSourcePath, createdBy, createdDate, dataOwner, lastUpdatedDate, lastUpdatedBy",
+    "COMMENT 7": ".. kanskje også maskingenerert 'dataPeriodFrom' og 'dataPeriodUntil' (hvilke perioder med data inneholder datasettet)",
+    "COMMENT 8": "Bør vi støtte 'populationDescription' både på datasettnivå og på variabelforekomst-nivå (enten eller (XOR))?"
+}
