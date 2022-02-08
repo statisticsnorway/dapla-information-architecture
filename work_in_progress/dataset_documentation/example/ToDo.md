@@ -11,7 +11,7 @@
 
 ## **Prototyp for datasettdokumentasjonssystem (DataDoc)**
 
-### Oversette DataDoc-infrormasjonsmodell til JSON Schema
+### Oversette DataDoc-informasjonsmodell til JSON Schema
 
 - Utarbeide et [JSON Schema (modell)](https://json-schema.org/) **per datatilstand**
   - Det er forskjellige krav til metadata for hver datatilstand. Vi må enten ta i bruk et JSON Schema per datatilstand, alternativt ta i bruk nye if-then-else-condition muligheter i JSON Schema
