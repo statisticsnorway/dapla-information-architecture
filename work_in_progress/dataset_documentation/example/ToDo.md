@@ -1,4 +1,4 @@
-# MVP for Dapla metadata
+# MVP 1, 2, 3 for Dapla metadataløsning
 
 ## **Prorotyp for variabeldefinisjonssystem (VarDef)**
 
@@ -29,7 +29,7 @@
 - Oversette attributter til norsk??
   - Lage en "Python-translator" for automatisk å oversettte mellom egelsk-norsk-engelsk attributtnavn og enum-lister?
 
-### Hente "basis metadata" fra datafil eksisterende datafil (CSV, Parquet, ...)
+### Hente "basis metadata" fra eksisterende datafil (CSV, Parquet, ...)
 
 - Python-metode som leser ut info fra datafil (Parquet, ..) og genererer et utkast (draft) til JSON-dokument
   - name (dataset filename and column names)
@@ -55,11 +55,12 @@
 - Ta i bruk en eller annen form for JSON Schema viewer som metadata editor (GUI)?
   - [react-jsonschema-form](https://react-jsonschema-form.readthedocs.io/en/latest/)
   - [jsonforms](https://jsonforms.io/)
+  - Andre løsinger?
 - Eventuelt Jupyter notebook med bruk av [Ipywidgets](https://ipywidgets.readthedocs.io/en/latest/index.html) som metadata-editor?
 
 ---
 
-## **Datadokumentasjon og "data pipelines"**
+## **Datadokumentasjon som en del av "data pipelines"**
 
 - Teste om det er mulig å inkludere dokumentasjonsarbeidet (DataDoc) som en del av en "data pipeline"? F.eks. om det er mulig å få til dette med bruk av notebooks i verktøy som [Elyra](https://elyra.readthedocs.io/en/stable/index.html)
 
@@ -77,3 +78,12 @@ Metadata må på sikt også gjøres tilgjengelig både internt og eksternt, f.ek
 
 ---
 
+## **Behov for integrasjon mellom databaser/sky-datatjenester (CloudSQL, BigQuery, ..) og datadokumentasjonsløsningen (DataDoc)?**
+
+Det må avklares om skybaserte datatjenester som CloudSQL, BigQyery og PubSub skal kunne brukes til å lagre stabile datatilstander av data (kildedata, inndata, klargjorte data, ..), eller om det er et krav at slike data må lagre som filer i kataloger (bøtter).
+
+**Det er viktig å være klar over at kravet til uforanderlighet (immutable data) og versjonering av datasett er mye enklere å implementere for "statiske datafiler" i en katalog (bøtte), enn for data i medlingssystemer og databaser som av natur er mye mer dynamiske (oppdateres fortløpende).**
+
+Hvis vi skal støtte full dokumentasjon av data i databaser og meldingssystemer må vi også ha en API-basert løsning for registrering av metadata i et sentralisert lager for DataDoc (i tillegg til DataDoc-løsningen med JSON-filer i kataloger).
+
+---
