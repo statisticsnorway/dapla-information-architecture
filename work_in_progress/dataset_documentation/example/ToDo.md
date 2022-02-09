@@ -1,4 +1,4 @@
-# MVP for Dapla metadata
+# MVP 1, 2, 3 for Dapla metadataløsning
 
 ## **Prorotyp for variabeldefinisjonssystem (VarDef)**
 
@@ -29,7 +29,7 @@
 - Oversette attributter til norsk??
   - Lage en "Python-translator" for automatisk å oversettte mellom egelsk-norsk-engelsk attributtnavn og enum-lister?
 
-### Hente "basis metadata" fra datafil eksisterende datafil (CSV, Parquet, ...)
+### Hente "basis metadata" fra eksisterende datafil (CSV, Parquet, ...)
 
 - Python-metode som leser ut info fra datafil (Parquet, ..) og genererer et utkast (draft) til JSON-dokument
   - name (dataset filename and column names)
